@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
@@ -11,7 +6,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <form id="frmusuario">
+        <form id="frmusuario" action="Controlador/ValidarUsuario.php" method="post">
             <div>
                 <label>
                     Usuario:
@@ -24,7 +19,7 @@ and open the template in the editor.
                 </label>
                 <input type="password" name="clave" id="clave">
             </div>
-            
+
             <input type="button" onclick="" value="Enviar" id="enviar">
         </form>
     </body>
@@ -34,10 +29,20 @@ and open the template in the editor.
                 //$("form").hide();
                 //alert("Ocultaste el Formulario"+$("#nomusuario").val());
                 if ($("#nomusuario").val() != "" && $("#clave".val() != "")) {
-                    $("#frmusuario").submit();
+                    //$("#frmusuario").submit();
+                    $.ajax({url: "Controlador/ValidarUsuario.php",
+                        type: post,
+                        data: {'nomusuario': $("#nomusuario").val(), 'clave': $("#clave").val()},
+                        success: function (resultado) {
+                            $("#mensaje").html(resultado);
+                        }
+                    }
+                    )
                 } else
                     alert("DEBE agregar el usuario y clave");
-            });
-        });
+            }
+            );
+        }
+        );
     </script>
 </html>
